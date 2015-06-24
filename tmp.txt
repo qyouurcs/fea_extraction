@@ -1,0 +1,9 @@
+/mnt/ilcompf2d0/project/qyou/libs/python_packages/lib/python2.7/site-packages/:/mnt/ilcompf2d0/project/qyou/src/caffe/python/
+../../src/caffe/models/bvlc_googlenet/deploy.prototxt
+./models/bvlc_googlenet.caffemodel
+../../data/Flickr8k_resized/flickr8k_resized.txt
+1
+5
+-1
+../../data/fea_flickr_8k
+fc7
