@@ -34,7 +34,6 @@ def batch_predict(filenames, net):
     F = net.blobs[net.outputs[0]].data.shape[1]
     Nf = len(filenames)
     batch_idx = 0
-    pdb.set_trace()
     for i in range(0, Nf, N):
         in_data = np.zeros((N, C, H, W), dtype=np.float32)
 
@@ -47,17 +46,18 @@ def batch_predict(filenames, net):
             im = imread(fname)
             if len(im.shape) == 2:
                 im = np.tile(im[:,:,np.newaxis], (1,1,3))
+            # resize
+            im = imresize(im, (H, W))
             # RGB -> BGR
             im = im[:,:,(2,1,0)]
             # mean subtraction
             im = im - np.array([103.939, 116.779, 123.68])
-            # resize
-            im = imresize(im, (H, W))
             # get channel in correct dimension
+            #im = np.transpose(im, (2, 1, 0))
+            # check caffe/classifier.py:85 
             im = np.transpose(im, (2, 0, 1))
             batch_images[j,:,:,:] = im
             print fname
-
         # insert into correct place
         in_data[0:len(batch_range), :, :, :] = batch_images
 
