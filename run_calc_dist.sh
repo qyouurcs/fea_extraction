@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-#if [ $# -lt 4 ]; then
-#    echo "Usage: $0 <deploy.prototxt> <modelfile> <image_list> <ProcessID> <ProcessNum> <save_dir> [layer=fc7]"
-#    exit
-#fi
+if [ $# -lt 3 ]; then
+    echo "Usage: $0 <h5py_dir> <process_id> <total_processes> [fea_len=1024]"
+    exit
+fi
 
 gid=$((${_CONDOR_SLOT:4} - 1 ))
 
@@ -18,6 +18,14 @@ local_lib="/mnt/ilcompf2d0/project/qyou/libs/"
 
 # this is really stupid. however, just use it currently.
 
+h5py_dir=$1
+process_id=$2
+total_process=$3
+fea_len=1024
+
+if [ $# -ge 4 ]; then
+    fea_len=$4
+fi
 
 if [ -z $LD_LIBRARY_PATH ]; then
     export LD_LIBRARY_PATH=$caffe_dep:$python_packages_dep:$local_lib
@@ -33,4 +41,4 @@ else
 fi
 
 echo $PYTHONPATH
-python run_batch_fea.py  --caffe ../caffe --model_def VGG_ILSVRC_16_layers_deploy.prototxt --model ./models/VGG_ILSVRC_16_layers.caffemodel --dir ./tmp --out . --gpu
+python script_calc_dist.py $fea_dir $process_id $total_process $fea_len
