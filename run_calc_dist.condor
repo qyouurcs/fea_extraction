@@ -1,11 +1,12 @@
 Universe     = vanilla
-Log = /mnt/ilcompf2d0/project/qyou/src/fea_extraction/calc_dist_$(Cluster).$(Process).log
-Error = /mnt/ilcompf2d0/project/qyou/src/fea_extraction/calc_dist_$(Cluster).$(Process).err
-Output = /mnt/ilcompf2d0/project/qyou/src/fea_extraction/calc_dist_$(Cluster).$(Process).out
+Log = /mnt/ilcompf2d0/project/qyou/src/fea_extraction/logs/calc_dist_$(Cluster).$(Process).log
+Error = /mnt/ilcompf2d0/project/qyou/src/fea_extraction/logs/calc_dist_$(Cluster).$(Process).err
+Output = /mnt/ilcompf2d0/project/qyou/src/fea_extraction/logs/calc_dist_$(Cluster).$(Process).out
 h5py_dir = /mnt/ilcompf1d1/data/captions/sbu_imgs_fea_dir
+h5py_dir_dst = /mnt/ilcompf1d1/data/captions/mscoco/fea_dir_train
 process_num = 10
 Executable = /bin/bash
-Arguments = -x /mnt/ilcompf2d0/project/qyou/src/fea_extraction/run_calc_dist.sh $(h5py_dir) $(Process) $(process_num)
+Arguments = -x /mnt/ilcompf2d0/project/qyou/src/fea_extraction/run_calc_dist.sh $(h5py_dir) $(h5py_dir_dst) $(Process) $(process_num)
 Notification = Always
 notify_user = qyou@adobe.com
 should_transfer_files = NO

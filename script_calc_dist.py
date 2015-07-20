@@ -88,7 +88,7 @@ if __name__ == '__main__':
         for fn in fns:
             ifn = os.path.splitext(fn)[0]
             idx = int(ifn.split('_')[-1])
-            if not idx % process_num:
+            if not idx % process_num == process_id:
                 # it's my job to do it. 
                 full_fn = os.path.join(root, fn)
                 distance(full_fn, dummy_fea, dummy_fns, save_dir, process_id, save_fns=save_fns)
