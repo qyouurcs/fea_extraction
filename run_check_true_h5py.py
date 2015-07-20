@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import os
 import h5py
 import sys
 import pdb
@@ -13,10 +13,21 @@ if __name__ == '__main__':
     src_dir = sys.argv[1]
     h5pys = glob.glob( os.path.join(src_dir, 'True*'))
 
+    fns_a = None
+
     for fn in h5pys:
-        fn = h5py.File(sys.argv[1],'r')
+        print 'loading', fn
+        fid = h5py.File(fn, 'r')
+        fns = fid['fns'][:]
+        if fns_a is None:
+            fns_a = fns
+        else:
+            for a,b in zip(fns_a, fns):
+                pdb.set_trace()
+                if a != b:
+                    print a
+                    print b
+                    sys.exit()
+    print 'Done, they are all the same'
 
-        pdb.set_trace()
-        print fn.keys()
-
-
+    
