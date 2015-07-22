@@ -59,14 +59,15 @@ if __name__ == '__main__':
                 key = os.path.basename(ref)
                 cap = sbu_img2dict[key]
                 cap_words = split_sentence(cap)
-                cap_words = cap_words[0:n_nearest]
+                if n_nearest > 0:
+                    cap_words = cap_words[0:n_nearest]
                 for word in cap_words:
                     if word not in dict_stop_words:
                         if word not in words:
                             words[word] = 0
                         words[word]  += 1
             word_list = sorted(words.items(), key = lambda x: x[1] , reverse = True)
-            print >>fidw, parts[0], ' '.join([ word[0] for word in word_list[0:top] ])
+            print >>fidw, parts[0], ' '.join([ str(word[0])+ ':' + str(word[1]) for word in word_list[0:top] ])
 
     fidw.close()
     print 'done with', save_fn
