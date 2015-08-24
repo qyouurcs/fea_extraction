@@ -4,6 +4,7 @@ import h5py
 import sys
 import pdb
 import glob
+import os
 
 if __name__ == '__main__':
     # check the consistency between different h5py file. 
